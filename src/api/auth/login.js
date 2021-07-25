@@ -1,20 +1,15 @@
 
 import axios from 'axios';
-//import {apiPath} from '../base';
+import {API_KEY} from '@env';
+import {SERVICE_URI} from '@env';
 
 export const login = (email, password) => {
-    console.log(email, password);  
     let formData = {
         email: email.value,
         password: password.value
     };      
-    return axios.post("http://litetools-scatalinio233286.codeanyapp.com:8001/api/app/login?api_token=AA__TTTTT1111", formData)
-    .then(function (response) {
-        console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-        console.log(error.message);
-    });
+    const url = SERVICE_URI + "login?api_token=" + API_KEY
+    return axios.post(url, formData);
 };
 
 const mockSuccess = (value) => {

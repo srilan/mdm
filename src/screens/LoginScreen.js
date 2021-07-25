@@ -11,6 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import {login} from '../api/auth/login';
+import { setToken } from '../api/auth/token';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -26,13 +27,19 @@ export default function LoginScreen({ navigation }) {
     }
     
     login(email, password)
-    .then(() => {
+    .then(async (response) => {
+      
+      await setToken(response.data.token);
+      console.log(response.data.token)
       navigation.reset({
         index: 0,
         routes: [{ name: 'Dashboard' }],
       })
     })
-    .catch((err) => console.log('error:', err.message));
+    .catch((err) => {
+      console.log('error:', err.message)
+      setEmail({ ...email, error: err.message })      
+    });
   }
 
   return (

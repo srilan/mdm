@@ -8,10 +8,9 @@ import Paragraph from '../components/Paragraph'
 export default function StartScreen({ navigation }) {
   return (
     <Background>
-      <Logo />
       <Header>Spotless</Header>
       <Paragraph>
-        The best cleaning service in town.
+        We will do all the cleaning for you
       </Paragraph>
       <Button
         mode="contained"
